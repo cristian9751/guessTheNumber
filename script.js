@@ -12,7 +12,6 @@ const checkWinner = function (winned) {
     highScore.innerHTML = score.number;
   document.body.style.backgroundColor = winned ? '#008000' : '#Ff0000';
   message.innerHTML = winned ? 'You gessed the number' : 'Sorry, try again';
-  show(true);
   gussedNumber.style.active = false;
 };
 
@@ -25,14 +24,14 @@ const checkNumber = function () {
   }
 
   let winned = guess === randomNumber;
-  if (!winned && score.number) {
+  if (!winned && score.number > 1) {
     guess > randomNumber
       ? (message.innerHTML = 'Too high')
       : (message.innerHTML = 'Too low');
-    score.setNumber((score.number -= 1));
   } else {
     checkWinner(winned);
   }
+  score.setNumber((score.number -= 1));
 };
 
 const reset = function () {
@@ -43,15 +42,11 @@ const reset = function () {
   showAgain(false);
 };
 
-const show = function (status) {
-  Array.from(document.getElementsByClassName('again')).forEach(element => {
-    element.style.display = status ? 'block' : 'none';
-  });
-  checkButton.active = !status;
-};
 score.setNumber = function (number) {
-  this.number = Number(number);
-  this.innerHTML = String(number);
+  if (number >= 0) {
+    this.number = Number(number);
+    this.innerHTML = String(number);
+  }
 };
 
 document.getElementById('resetButton').addEventListener('click', reset);
