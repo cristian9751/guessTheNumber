@@ -24,7 +24,7 @@ const checkNumber = function () {
   }
 
   let winned = guess === randomNumber;
-  if (!winned && score.number > 1) {
+  if (!winned && score.number >= 1) {
     guess > randomNumber
       ? (message.innerHTML = 'Too high')
       : (message.innerHTML = 'Too low');
