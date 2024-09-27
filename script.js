@@ -24,14 +24,14 @@ const checkNumber = function () {
   }
 
   let winned = guess === randomNumber;
-  if (!winned && score.number >= 1) {
+    score.setNumber((score.number -= 1));
+  if (!winned && score.number > 1) {
     guess > randomNumber
       ? (message.innerHTML = 'Too high')
       : (message.innerHTML = 'Too low');
   } else {
     checkWinner(winned);
   }
-  score.setNumber((score.number -= 1));
 };
 
 const reset = function () {
